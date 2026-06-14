@@ -25,14 +25,15 @@ let timer;
 
 startBtn.addEventListener("click", () => {
 
-    startScreen.style.display = "none";
+    document.querySelector(".gallery").style.display = "none";
+    document.querySelector(".header").style.display = "none";
 
+    startScreen.style.display = "none";
     quizContainer.style.display = "block";
 
     music.play().catch(() => {});
 
     startTimer();
-
     loadQuestion();
 });
 
