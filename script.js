@@ -145,37 +145,21 @@ function finishQuiz() {
     const percentage =
         (score / questions.length) * 100;
 
-    if (percentage < 20) {
-        level = "A1 Beginner";
-    }
-    else if (percentage < 40) {
-        level = "A2 Elementary";
-    }
-    else if (percentage < 60) {
-        level = "B1 Intermediate";
-    }
-    else if (percentage < 80) {
-        level = "B2 Upper Intermediate";
-    }
-    else if (percentage < 90) {
-        level = "C1 Advanced";
-    }
-    else {
-        level = "C2 Proficient";
-    }
-
-    levelElement.textContent =
-        `Your English Level: ${level}`;
-
-    progressBar.style.width = "100%";
-
-    localStorage.setItem(
-        "mester_last_score",
-        score
-    );
-
-    localStorage.setItem(
-        "mester_last_level",
-        level
-    );
+  if (percentage < 20) {
+    level = "A1 Beginner";
+}
+else if (percentage < 40) {
+    level = "A2 Elementary";
+}
+else if (percentage < 60) {
+    level = "B1 Intermediate";
+}
+else if (percentage < 75) {
+    level = "B2 Upper Intermediate";
+}
+else if (percentage < 90) {
+    level = "C1 Advanced";
+}
+else {
+    level = "C2 Proficient";
 }
