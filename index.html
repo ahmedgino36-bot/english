@@ -1,67 +1,79 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MESTER English Test</title>
 
-    <link rel="stylesheet" href="style.css">
+```
+<link rel="stylesheet" href="style.css">
+```
+
 </head>
 <body>
 
-    <!-- Background Music -->
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+```
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Header -->
-    <header class="header">
-        <img src="logo.jpg" alt="Logo" class="logo">
-        <h1>MESTER English Test</h1>
-        <p>Discover your English level from A1 to C2</p>
-    </header>
+<!-- Header -->
+<header class="header">
+    <img src="logo.png" alt="MESTER Logo" class="logo">
+    <h1>MESTER English Test</h1>
+    <p>Discover your English level from A1 to C2</p>
+</header>
 
-    <!-- Gallery -->
-    <section class="gallery">
-        <img src="photo1.jpg" alt="">
-        <img src="photo2.jpg" alt="">
-        <img src="photo3.jpg" alt="">
-        <img src="photo4.jpg" alt="">
-        <img src="photo5.jpg" alt="">
-        <img src="photo6.jpg" alt="">
-    </section>
+<!-- Gallery -->
+<section class="gallery">
+    <img src="photo1.jpg" alt="">
+    <img src="photo2.jpg" alt="">
+    <img src="photo3.jpg" alt="">
+    <img src="photo4.jpg" alt="">
+    <img src="photo5.jpg" alt="">
+    <img src="photo6.jpg" alt="">
+</section>
 
-    <!-- Start Screen -->
-    <section id="startScreen">
-        <button id="startBtn">Start Test</button>
-    </section>
+<!-- Start Screen -->
+<section id="startScreen">
+    <button id="startBtn">Start Test</button>
+</section>
 
-    <!-- Quiz -->
-    <section id="quizContainer" style="display:none;">
-        <div id="timer">15:00</div>
+<!-- Quiz -->
+<section id="quizContainer" style="display:none;">
 
-        <div class="progress-bar">
-            <div id="progress"></div>
-        </div>
+    <div id="timer">15:00</div>
 
-        <h2 id="question"></h2>
+    <div class="progress-bar">
+        <div id="progress"></div>
+    </div>
 
-        <div id="answers"></div>
+    <h2 id="question"></h2>
 
-        <button id="nextBtn">Next</button>
-    </section>
+    <div id="answers"></div>
 
-    <!-- Result -->
-    <section id="resultContainer" style="display:none;">
-        <h2>Your Result</h2>
-        <p id="score"></p>
-        <p id="level"></p>
+    <button id="nextBtn">Next</button>
 
-        <button onclick="location.reload()">Try Again</button>
-    </section>
+</section>
 
-    <script src="questions.js"></script>
-    <script src="script.js"></script>
+<!-- Result -->
+<section id="resultContainer" style="display:none;">
+    <h2>Your Result</h2>
+
+    <p id="score"></p>
+
+    <p id="level"></p>
+
+    <button onclick="location.reload()">
+        Try Again
+    </button>
+</section>
+
+<script src="questions.js"></script>
+<script src="script.js"></script>
+```
 
 </body>
 </html>
