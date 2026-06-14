@@ -1,6 +1,6 @@
 const startBtn = document.getElementById("startBtn");
-const quizContainer = document.getElementById("quizContainer");
 const startScreen = document.getElementById("startScreen");
+const quizContainer = document.getElementById("quizContainer");
 const resultContainer = document.getElementById("resultContainer");
 
 const questionElement = document.getElementById("question");
@@ -23,143 +23,200 @@ let score = 0;
 let timeLeft = 900;
 let timer;
 
+/* Start Test */
+
 startBtn.addEventListener("click", () => {
 
-    document.querySelector(".gallery").style.display = "none";
-    document.querySelector(".header").style.display = "none";
+```
+document.querySelector(".header").style.display = "none";
+document.querySelector(".gallery").style.display = "none";
 
-    startScreen.style.display = "none";
-    quizContainer.style.display = "block";
+startScreen.style.display = "none";
+quizContainer.style.display = "block";
 
-    music.play().catch(() => {});
+music.play().catch(() => {});
 
-    startTimer();
-    loadQuestion();
+startTimer();
+loadQuestion();
+```
+
 });
 
-function loadQuestion() {
+/* Load Question */
 
-    const q = questions[currentQuestion];
+function loadQuestion(){
 
-    questionElement.textContent =
-        `${currentQuestion + 1}. ${q.question}`;
+```
+const q = questions[currentQuestion];
 
-    answersElement.innerHTML = "";
+questionElement.textContent =
+    `${currentQuestion + 1}. ${q.question}`;
 
-    q.answers.forEach((answer, index) => {
+answersElement.innerHTML = "";
 
-        const div = document.createElement("div");
+q.answers.forEach((answer,index)=>{
 
-        div.classList.add("answer");
+    const div = document.createElement("div");
 
-        div.innerHTML = `
-            <label>
-                <input type="radio"
-                       name="answer"
-                       value="${index}">
-                ${answer}
-            </label>
-        `;
+    div.classList.add("answer");
 
-        answersElement.appendChild(div);
-    });
+    div.innerHTML = `
+        <label>
+            <input type="radio"
+                   name="answer"
+                   value="${index}">
+            ${answer}
+        </label>
+    `;
 
-    updateProgress();
+    answersElement.appendChild(div);
+});
+
+updateProgress();
+```
+
 }
 
-nextBtn.addEventListener("click", () => {
+/* Next Question */
 
-    const selected =
-        document.querySelector('input[name="answer"]:checked');
+nextBtn.addEventListener("click",()=>{
 
-    if (!selected) {
-        alert("Please select an answer.");
-        return;
-    }
+```
+const selected =
+document.querySelector(
+    'input[name="answer"]:checked'
+);
 
-    if (
-        Number(selected.value) ===
-        questions[currentQuestion].correct
-    ) {
-        score++;
-    }
+if(!selected){
 
-    currentQuestion++;
+    alert("Please select an answer.");
+    return;
+}
 
-    if (currentQuestion >= questions.length) {
+if(
+    Number(selected.value) ===
+    questions[currentQuestion].correct
+){
+    score++;
+}
+
+currentQuestion++;
+
+if(currentQuestion >= questions.length){
+
+    finishQuiz();
+    return;
+}
+
+loadQuestion();
+```
+
+});
+
+/* Progress Bar */
+
+function updateProgress(){
+
+```
+const percent =
+(currentQuestion / questions.length) * 100;
+
+progressBar.style.width =
+percent + "%";
+```
+
+}
+
+/* Timer */
+
+function startTimer(){
+
+```
+timer = setInterval(()=>{
+
+    timeLeft--;
+
+    const minutes =
+    Math.floor(timeLeft / 60);
+
+    const seconds =
+    timeLeft % 60;
+
+    timerElement.textContent =
+    `${minutes}:${seconds
+    .toString()
+    .padStart(2,"0")}`;
+
+    if(timeLeft <= 0){
+
+        clearInterval(timer);
+
         finishQuiz();
-        return;
     }
 
-    loadQuestion();
-});
+},1000);
+```
 
-function updateProgress() {
-
-    const percent =
-        (currentQuestion / questions.length) * 100;
-
-    progressBar.style.width = percent + "%";
 }
 
-function startTimer() {
+/* Finish Quiz */
 
-    timer = setInterval(() => {
+function finishQuiz(){
 
-        timeLeft--;
+```
+clearInterval(timer);
 
-        const minutes =
-            Math.floor(timeLeft / 60);
+quizContainer.style.display = "none";
 
-        const seconds =
-            timeLeft % 60;
+resultContainer.style.display = "block";
 
-        timerElement.textContent =
-            `${minutes}:${seconds
-                .toString()
-                .padStart(2, "0")}`;
+scoreElement.textContent =
+`Score: ${score} / ${questions.length}`;
 
-        if (timeLeft <= 0) {
+const percentage =
+(score / questions.length) * 100;
 
-            clearInterval(timer);
+let level = "";
 
-            finishQuiz();
-        }
+if(percentage < 20){
 
-    }, 1000);
-}
-
-function finishQuiz() {
-
-    clearInterval(timer);
-
-    quizContainer.style.display = "none";
-
-    resultContainer.style.display = "block";
-
-    scoreElement.textContent =
-        `Score: ${score} / ${questions.length}`;
-
-    let level = "";
-
-    const percentage =
-        (score / questions.length) * 100;
-
-  if (percentage < 20) {
     level = "A1 Beginner";
 }
-else if (percentage < 40) {
+else if(percentage < 40){
+
     level = "A2 Elementary";
 }
-else if (percentage < 60) {
+else if(percentage < 60){
+
     level = "B1 Intermediate";
 }
-else if (percentage < 75) {
+else if(percentage < 75){
+
     level = "B2 Upper Intermediate";
 }
-else if (percentage < 90) {
+else if(percentage < 90){
+
     level = "C1 Advanced";
 }
-else {
+else{
+
     level = "C2 Proficient";
+}
+
+levelElement.textContent =
+`Your English Level: ${level}`;
+
+progressBar.style.width = "100%";
+
+localStorage.setItem(
+    "mester_score",
+    score
+);
+
+localStorage.setItem(
+    "mester_level",
+    level
+);
+```
+
 }
